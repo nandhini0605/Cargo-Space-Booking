@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #333;
+            color: #fff;
+        }
+        
+        button {
+            padding: 8px 16px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <h2>Container Details</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Size</th>
+                    <th>Mode</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="containerList"></tbody>
+        </table>
+
+        <form id="containerForm">
+            <h3 id="formTitle">Add Container</h3>
+            <input type="hidden" id="containerId" name="containerId">
+            <label for="size">Size:</label>
+            <input type="text" id="size" name="size" required>
+
+            <label for="mode">Mode:</label>
+            <input type="text" id="mode" name="mode" required>
+
+            <button type="submit">Save Container</button>
+        </form>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const containerList = document.getElementById('containerList');
+            const containerForm = document.getElementById('containerForm');
+
+            let containers = [];
+
+            // Function to render container list
+            function renderContainerList() {
+                containerList.innerHTML = '';
+                containers.forEach(container => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${container.id}</td>
+                        <td>${container.size}</td>
+                        <td>${container.mode}</td>
+                        <td>${container.status}</td>
+                        <td>
+                            <button onclick="editContainer(${container.id})">Edit</button>
+                            <button onclick="deleteContainer(${container.id})">Delete</button>
+                        </td>
+                    `;
+                    containerList.appendChild(row);
+                });
+            }
+
+            // Function to handle form submission (add or update container)
+            containerForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const containerId = document.getElementById('containerId').value;
+                const size = document.getElementById('size').value;
+                const mode = document.getElementById('mode').value;
+
+                if (!size || !mode) {
+                    alert('Size and Mode are required.');
+                    return;
+                }
+
+                // Check if it's an existing container (edit) or a new container (add)
+                const existingContainerIndex = containers.findIndex(container => container.id == containerId);
+                if (existingContainerIndex !== -1) {
+                    // Edit existing container
+                    containers[existingContainerIndex].size = size;
+                    containers[existingContainerIndex].mode = mode;
+                } else {
+                    // Add new container
+                    const newContainer = {
+                        id: containers.length + 1,
+                        size,
+                        mode,
+                        status: 'Available',
+                    };
+                    containers.push(newContainer);
+                }
+
+                // Update the container list
+                renderContainerList();
+
+                // Clear the form
+                containerForm.reset();
+                document.getElementById('formTitle').innerText = 'Add Container';
+            });
+
+            // Function to handle container editing
+            window.editContainer = function(containerId) {
+                const containerToEdit = containers.find(container => container.id == containerId);
+                if (containerToEdit) {
+                    document.getElementById('containerId').value = containerToEdit.id;
+                    document.getElementById('size').value = containerToEdit.size;
+                    document.getElementById('mode').value = containerToEdit.mode;
+                    document.getElementById('formTitle').innerText = 'Edit Container';
+                }
+            };
+
+            // Function to handle container deletion
+            window.deleteContainer = function(containerId) {
+                const confirmDelete = confirm('Are you sure you want to delete this container?');
+                if (confirmDelete) {
+                    containers = containers.filter(container => container.id != containerId);
+                    renderContainerList();
+                }
+            };
+
+            // Initial render of container list
+            renderContainerList();
+        });
+    </script>
+</body>
+
+</html>

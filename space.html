@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo Space Booking</title>
+    <link rel="stylesheet" href="space.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Cargo Space Booking</h1>
+        <div class="legend">
+            <div class="legend-item booked">Booked Space</div>
+            <div class="legend-item available">Available Space</div>
+        </div>
+        <div class="cargo-space">
+            <!-- Space grid/table will be dynamically generated here -->
+        </div>
+        <button class="payment-button" onclick="goToPayment()">Go to Payment</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const cargoSpace = document.querySelector(".cargo-space");
+            const bookedSpaces = JSON.parse(localStorage.getItem("bookedSpaces")) || {};
+
+            // Example: Generate a 5x5 grid of space cells
+            for (let i = 1; i <= 40; i++) {
+                const spaceCell = document.createElement("div");
+                spaceCell.classList.add("space-cell");
+                spaceCell.textContent = i;
+
+                // Check if space is booked from local storage
+                if (bookedSpaces[i]) {
+                    spaceCell.classList.add("booked");
+                } else {
+                    spaceCell.classList.add("available");
+
+                    // Add click event listener for booking
+                    spaceCell.addEventListener("click", function() {
+                        bookSpace(spaceCell);
+                    });
+                }
+
+                cargoSpace.appendChild(spaceCell);
+            }
+
+            function bookSpace(cell) {
+                if (cell.classList.contains("available")) {
+                    cell.classList.remove("available");
+                    cell.classList.add("booked");
+
+                    // Store booked space information in local storage
+                    bookedSpaces[cell.textContent] = true;
+                    localStorage.setItem("bookedSpaces", JSON.stringify(bookedSpaces));
+
+                    alert("Space booked: " + cell.textContent);
+                } else {
+                    alert("Space already booked!");
+                }
+            }
+
+        });
+
+        function goToPayment() {
+            // Redirect to the payment page (payment.html)
+            window.location.href = 'payment.html';
+        }
+    </script>
+</body>
+
+</html>

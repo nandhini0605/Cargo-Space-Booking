@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Provider Registration</title>
+    <!-- Include Tailwind CSS via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('serprovreg.jpeg.jpg');
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        /* Custom styles for the background image */
+        
+        .background-image {
+            background-image: url('path_to_ship_image.jpg');
+            /* Replace with the actual image path */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Animation for form appearance */
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Style for the form container */
+        
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            /* Increased padding for better spacing */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 1100px;
+            /* Increased max-width for better desktop view */
+            animation: slideIn 1s ease-out;
+        }
+        /* Style for submit button */
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            /* Increased padding for better button size */
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        /* Hover effect for submit button */
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+        
+        .input {
+            border: 1px solid #cbd5e0;
+            border-radius: 0.375rem;
+            padding: 0.5rem;
+        }
+        
+        .badge-secondary {
+            color: #fff;
+            background-color: #2980b9;
+            ;
+            padding-right: 0.6em;
+            padding-left: 0.6em;
+            border-radius: 10rem;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+</head>
+
+<body class="font-sans">
+    <div class="background-image">
+        <div class="form-container mx-auto text-center">
+            <h2 class="text-2xl font-bold mb-6">SERVICE PROVIDER REGISTRATION</h2>
+            <form action="registration_process.php" method="post" class="bg-white p-8 shadow-lg sm:rounded-3xl sm:p-10">
+                <div class="mb-4">
+                    <label class="text-gray-700" for="username">Username:</label>
+                    <input class="input" type="text" id="username" name="username" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="password">Password:</label>
+                    <input class="input" type="password" id="password" name="password" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="email">Email:</label>
+                    <input class="input" type="email" id="email" name="email" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="phone">Phone Number:</label>
+                    <input class="input" type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="companyName">Company Name:</label>
+                    <input class="input" type="text" id="companyName" name="companyName" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="registrationNumber"> Company Registration Number:</label>
+                    <input class="input" type="text" id="registrationNumber" name="registrationNumber" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="servicesProvided">Services Provided:</label>
+                    <input class="input" type="text" id="servicesProvided" name="servicesProvided" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="coverageArea">Service Coverage Area:</label>
+                    <input class="input" type="text" id="coverageArea" name="coverageArea" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="experience">Years of Experience:</label>
+                    <input class="input" type="number" id="experience" name="experience" required>
+                </div>
+
+                <div class="mb-4">
+                    <label class="text-gray-700" for="businessLicense">Business License/Certificate:</label>
+                    <input class="input" type="file" id="businessLicense" name="businessLicense" accept=".pdf, .doc, .docx" required>
+                </div>
+
+                <!-- Terms Checkbox -->
+                <div class="mb-4">
+                    <label class="flex items-center" for="terms">
+            <input class="mr-2" id="terms" type="checkbox">
+            <span class="text-sm">
+              By submitting this form, I acknowledge that I have read and agree to the terms and conditions of the cargo booking portal.
+            </span>
+          </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button class="hover:bg-blue-800" type="submit">
+            REGISTER
+          </button>
+
+                <p>Already have an account? <a class="badge-secondary" href="login.html">Login here</a></p>
+            </form>
+        </div>
+    </div>
+    <script>
+        // TailwindCSS initialization script if needed
+    </script>
+</body>
+
+</html>

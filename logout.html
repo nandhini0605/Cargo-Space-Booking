@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout - Logistics Express</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+      background-image: url('logoutbg.jpg');
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+    }
+
+    header {
+      background-color: #02828e;
+      color: #fff;
+      padding: 15px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    h1, h2 {
+      color: #333;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #666;
+    }
+
+    a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+input{
+  background-color: #45a049;
+}
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CARGO EXPRESS</h1>
+  </header>
+
+  <div class="container">
+    <h2>Logout</h2>
+    <p>
+      Are you sure you want to logout?
+    </p>
+
+    <button class = "input" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function logout() {
+      // Perform logout actions (e.g., clear session, redirect to login page)
+      // Here, we'll just simulate a redirect to the login page
+      alert("Logout successful.");
+      window.location.href = "login.html"; // Replace with your actual login page
+    }
+  </script>
+
+</body>
+</html>

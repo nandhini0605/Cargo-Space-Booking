@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargo Company Selection</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: url('compsel.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #3498db;
+            text-align: center;
+        }
+        
+        .company-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .company-card:hover {
+            background-color: #f2f2f2;
+        }
+        
+        .details-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        
+        button {
+            padding: 12px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Select a Cargo Company</h2>
+
+        <!-- Company Cards -->
+        <div id="companySelection"></div>
+
+        <!-- Details Container (Initially Hidden) -->
+        <div id="detailsContainer" class="details-container"></div>
+
+    </div>
+
+    <script>
+        // Function to fetch service providers' data from the server
+        async function fetchServiceProviders() {
+            try {
+                const response = await fetch('fetch_service_providers.php');
+                const data = await response.json();
+
+                if (data.success) {
+                    return data.data;
+                } else {
+                    console.error('Error fetching service providers:', data.message);
+                    return [];
+                }
+            } catch (error) {
+                console.error('Fetch error:', error);
+                return [];
+            }
+        }
+
+        // Function to display cargo company cards
+        async function displayCompanies() {
+            const companyContainer = document.getElementById('companySelection');
+            companyContainer.innerHTML = '';
+
+            // Fetch service providers' data
+            const serviceProviders = await fetchServiceProviders();
+
+            serviceProviders.forEach(company => {
+                const card = document.createElement('div');
+                card.classList.add('company-card');
+                card.innerHTML = `<h3>${company.companyName}</h3>`;
+                card.addEventListener('click', () => showDetails(company));
+                companyContainer.appendChild(card);
+            });
+        }
+
+        // Function to show details for a selected cargo company
+        function showDetails(selectedCompany) {
+            const detailsContainer = document.getElementById('detailsContainer');
+            detailsContainer.innerHTML = '';
+
+            const details = document.createElement('div');
+            details.innerHTML = `
+        <h2>${selectedCompany.companyName}</h2>
+        <p><strong>Services offered:</strong> ${Array.isArray(selectedCompany.servicesProvided) ? selectedCompany.servicesProvided.join(', ') : selectedCompany.servicesProvided}</p>
+        <p><strong>Service Areas:</strong> ${selectedCompany.coverageArea}</p>
+        <button onclick="bookSpace('${selectedCompany.companyName}')">Book Space</button>
+    `;
+
+            detailsContainer.innerHTML = '';
+            detailsContainer.appendChild(details);
+            detailsContainer.style.display = 'block';
+        }
+
+        // Function to redirect to booking page
+        function bookSpace(companyName) {
+            // You can customize the URL or perform additional logic here
+            window.location.href = `booking.html?company=${encodeURIComponent(companyName)}`;
+        }
+
+
+        // Initial display of cargo company cards
+        displayCompanies();
+    </script>
+
+</body>
+
+</html>

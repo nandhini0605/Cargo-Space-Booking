@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #92A8D1;
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.legend-item {
+    margin: 0 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.booked {
+    background-color: #ff9999;
+    /* Red for booked space */
+    color: #fff;
+}
+
+.available {
+    background-color: #99ff99;
+    /* Green for available space */
+    color: #333;
+}
+
+.cargo-space {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    /* Adjust based on your layout */
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.space-cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #ccc;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+.booked {
+    background-color: #ff9999;
+    /* Red for booked space */
+}
+
+.available {
+    background-color: #99ff99;
+    /* Green for available space */
+}
+
+.payment-button {
+    padding: 10px 20px;
+    background-color: #4299e1;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.payment-button:hover {
+    background-color: #3182ce;
+}

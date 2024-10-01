@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Logistics Express</title>
+    <!-- Include qrcode.js -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            background-image: url('payment.jpg');
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        header {
+            background-color: rgb(43, 89, 168) 97, 14;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgb(154, 169, 188);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        
+        h1 {
+            color: #9f9999;
+            text-align: center;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+        
+        p {
+            line-height: 1.6;
+            color: #0a0a0a;
+        }
+        
+        form {
+            margin-top: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+        }
+        
+        .qr-code {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            /* Adjust the height as needed */
+            margin: 20px 0;
+            /* Add margin for spacing */
+        }
+        
+        .qr-code img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        input[type="submit"] {
+            background-color: #4c99af;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>CARGO EXPRESS</h1>
+    </header>
+
+    <div class="container">
+        <h2>Make Payment</h2>
+        <p>
+            Please enter UPI ID and scan the QR code for making the payment.
+        </p>
+
+        <div id="qr-code" class="qr-code"></div>
+
+        <form action="payment_process.php" method="post" onsubmit="return handlePayment()">
+            <label for="upiId">UPI ID:</label>
+            <input type="text" id="upiId" name="upiId" placeholder="yourname@upi" required>
+
+            <input type="submit" value="Make Payment">
+        </form>
+    </div>
+
+    <script>
+        // Flag to check if the QR code has been generated
+        var qrCodeGenerated = false;
+
+        // Function to generate QR code
+        function generateQRCode(text) {
+            var qrcode = new QRCode(document.getElementById("qr-code"), {
+                text: text,
+                width: 128,
+                height: 128,
+            });
+
+            // Set the flag to true after generating the QR code
+            qrCodeGenerated = true;
+        }
+
+        function handlePayment() {
+            var upiId = document.getElementById("upiId").value;
+            if (!qrCodeGenerated) {
+                generateQRCode(upiId);
+            }
+            // Redirect to payment_success.html
+            window.location.href = 'payment_success.html';
+            return false;
+        }
+        // Initial QR code generation (you can replace this with actual data)
+        generateQRCode("yourname@upi");
+    </script>
+
+</body>
+
+</html>

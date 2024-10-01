@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+    <title>User Type Selection</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('homebg.jpg');
+            /* Full height */
+            height: 100%;
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        
+        .user-type-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            max-height: 600px;
+            animation: slideIn 1s ease-out;
+        }
+        
+        .app-name {
+            font-size: 40px;
+            font-weight: bold;
+            color: #126365;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 30px;
+            margin-bottom: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h2 {
+            font-size: 30px;
+            font-family: 'Montserrat', sans-serif;
+            color: #399ea5;
+            margin-bottom: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
+</head>
+
+<body>
+    <div class="user-type-container">
+        <h1></h1>
+        <div class="app-name">Welcome to CargoExpress</div>
+        <h2>Your Cargo, Our Commitment.</h2>
+        <h1>Select User Type</h1>
+        <button onclick="redirectToRegistration('trader')">Trader</button>
+        <button onclick="redirectToRegistration('serviceProvider')">Logistics Service Provider</button>
+
+        <!-- New Buttons -->
+        <button onclick="redirectToChatBotAid()">Chatbot Aid</button>
+        <button onclick="redirectToAboutUs()">About Us</button>
+        <button onclick="redirectToContactUs()">Contact Us</button>
+        <button onclick="redirectToFeedback()">Feedback</button>
+    </div>
+
+    <script>
+        function redirectToRegistration(userType) {
+            if (userType === 'trader') {
+                window.location.href = 'register_trader.html';
+            } else if (userType === 'serviceProvider') {
+                window.location.href = 'serprovreg.html';
+            }
+        }
+
+        function redirectToChatBotAid() {
+            window.location.href = 'bot.html'; // Replace with the actual URL of the dashboard page
+        }
+
+        function redirectToAboutUs() {
+            window.location.href = 'about.html'; // Replace with the actual URL of the about us page
+        }
+
+        function redirectToContactUs() {
+            window.location.href = 'contactus.html'; // Replace with the actual URL of the contact us page
+        }
+
+        function redirectToFeedback() {
+            window.location.href = 'feedback.html'; // Replace with the actual URL of the about us page
+        }
+    </script>
+</body>
+
+</html>
